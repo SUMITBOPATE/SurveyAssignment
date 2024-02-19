@@ -1,8 +1,14 @@
 import React, { useState ,useEffect} from 'react';
 import * as Yup from "yup";
 function Inputfields() {
+
+
+
+    // 
+
+//  to do paddin increase  of input box marging decrese form left right     
 //   const [formData, setFormData] = useState({
-//     firstName: '',
+//     surveyorName: '',
 //     lastName: '',
 //     email: '',
 //     phoneNumber: '',
@@ -40,7 +46,7 @@ function Inputfields() {
 //     console.log(formData);
 //   };
 const [formData, setFormData] = useState({
-    surveyorName: "",
+    surveyorName: "",//
     zoneNo: "",
     wardNo: "",
     address:"",
@@ -57,8 +63,8 @@ const [formData, setFormData] = useState({
   const [errors, setErrors] = useState({});
 
   const validationSchema = Yup.object({
-    firstName: Yup.string().required("First Name is Required"),
-    lastName: Yup.string().required("Last Name is Required"),
+    surveyorName: Yup.string().required("Surveyor Name is Required"),
+    zoneNo: Yup.string().required("Zone No is Required"),
     email: Yup.string()
       .required("Email is Required")
       .email("Invalid email format"),
@@ -136,35 +142,35 @@ const [formData, setFormData] = useState({
 
 
   //for address
-  const getUserLocationAndAddress = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const { latitude, longitude } = position.coords;
-          // Use Google Maps Geocoding API to get the address
-          const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=YOUR_API_KEY`);
-          const data = await response.json();
-          if (data.results && data.results.length >  0) {
-            const address = data.results[0].formatted_address;
-            setFormData(prevState => ({
-              ...prevState,
-              address: address,
-            }));
-          }
-        },
-        (error) => {
-          console.error('Error getting user location', error);
-        }
-      );
-    } else {
-      console.error('Geolocation is not supported by this browser.');
-    }
-  };
+  // const getUserLocationAndAddress = () => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       async (position) => {
+  //         const { latitude, longitude } = position.coords;
+  //         // Use Google Maps Geocoding API to get the address
+  //         const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=YOUR_API_KEY`);
+  //         const data = await response.json();
+  //         if (data.results && data.results.length >  0) {
+  //           const address = data.results[0].formatted_address;
+  //           setFormData(prevState => ({
+  //             ...prevState,
+  //             address: address,
+  //           }));
+  //         }
+  //       },
+  //       (error) => {
+  //         console.error('Error getting user location', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.error('Geolocation is not supported by this browser.');
+  //   }
+  // };
 
-  // Call the function to get user's location and address when the component mounts
-  useEffect(() => {
-    getUserLocationAndAddress();
-  }, []);
+  // // Call the function to get user's location and address when the component mounts
+  // useEffect(() => {
+  //   getUserLocationAndAddress();
+  // }, []);
 
 
 
@@ -175,27 +181,27 @@ const [formData, setFormData] = useState({
     <div className="w-full max-w-full  text-start bg-purple-600 font-medium text-white p-4 m-2">
         Survey Application</div>
         <div className='font-bold text-center'>   Storm Water Assessment Form</div>
-    <form className="form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+    <form className="form bg-white shadow-md rounded px-4 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
       <div className="mb-4">
         {/* <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
         
         </label> */}
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 font-medium text-gray-900  bg-neutral-300 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-3 px-3 font-medium text-gray-900  bg-neutral-300 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
-          name="firstName"
-          value={formData.firstName}
+          name="surveyorName"
+          value={formData.surveyorName}
           placeholder="Surveyor Name"
           onChange={handleChange}
         />
-        {errors.firstName && <div className="text-red-500 text-xs italic">{errors.firstName}</div>}
+        {errors.surveyorName && <div className="text-red-500 text-xs italic">{errors.surveyorName}</div>}
       </div>
       <div className="mb-4">
         {/* <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">
           Gender:
         </label> */}
         <select
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           name="gender"
           value={formData.gender}
           onChange={handleChange}
@@ -213,7 +219,7 @@ const [formData, setFormData] = useState({
           Last Name:
         </label> */}
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           name="lastName"
           value={formData.lastName}
@@ -227,7 +233,7 @@ const [formData, setFormData] = useState({
 <div className='mb-4'>
 <input
       type="text"
-      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       name="address"
       value={formData.address}
       placeholder="Address"
