@@ -7,13 +7,12 @@ function Form({ onSubmit }) {
     surveyorName: "",
     zoneNo: [],
     wardNo: "",
-    address:"",
     streetName: "",
-    conditionofManhole: "",
+    conditionofManhole: [],
   inwardLevel: "",
     topLevel: "",
     remark: "",
-    typeofPipe:"",
+    typeofPipe:[],
     birthDate: "",
     // ... other form fields
   });
@@ -26,7 +25,11 @@ function Form({ onSubmit }) {
       [name]: value,
     }));
   };
-
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    // You can now process the file, for example, by updating the state with the file object
+    onChange(file); // Pass the file object to the parent component
+  };
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   // ... validation logic
@@ -74,14 +77,14 @@ function Form({ onSubmit }) {
         error={errors.surveyorName}
       />
       <FormField
-  name="zoneNo"
-  label="zoneNo"
+  name="conditionofManhole"
+  label="conditionofManhole"
   type="select"
-  value={formData.zoneNo}
+  value={formData.conditionofManhole}
   onChange={handleChange}
-  error={errors.zoneNo}
+  error={errors.conditionofManhole}
   options={[
-    { value: 'zoneNo', label: 'Select Zone' },
+    { value: 'conditionofManhole', label: 'Select Option' },
     { value: 'option1', label: 'Option 1' },
     { value: 'option2', label: 'Option 2' },
     { value: 'option3', label: 'Option 3' },
@@ -96,14 +99,7 @@ function Form({ onSubmit }) {
         onChange={handleChange}
         error={errors.wardNo}
       />
-      <FormField
-        name="address"
-        label="Address"
-        type="text"
-        value={formData.address}
-        onChange={handleChange}
-        error={errors.address}
-      />
+     
       <FormField
         name="streetName"
         label="Street Name"
@@ -112,14 +108,20 @@ function Form({ onSubmit }) {
         onChange={handleChange}
         error={errors.streetName}
       />
-      <FormField
-        name="conditionofManhole"
-        label="Condition of Manhole"
-        type="text"
-        value={formData.conditionofManhole}
-        onChange={handleChange}
-        error={errors.conditionofManhole}
-      />
+    <FormField
+  name="condition"
+  label="condition"
+  type="select"
+  value={formData.zoneNo}
+  onChange={handleChange}
+  error={errors.zoneNo}
+  options={[
+    { value: 'zoneNo', label: 'Select Zone' },
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+  ]}
+/>
       <FormField
         name="inwardLevel"
         label="Inward Level"
@@ -144,14 +146,20 @@ function Form({ onSubmit }) {
         onChange={handleChange}
         error={errors.remark}
       />
-      <FormField
-        name="typeofPipe"
-        label="Type of Pipe"
-        type="text"
-        value={formData.typeofPipe}
-        onChange={handleChange}
-        error={errors.typeofPipe}
-      />
+         <FormField
+  name="typeofPipe"
+  label="typeofPipe"
+  type="select"
+  value={formData.typeofPipe}
+  onChange={handleChange}
+  error={errors.typeofPip}
+  options={[
+    { value: 'typeofPipe', label: 'Select Type' },
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+  ]}
+/>
       <FormField
         name="birthDate"
         label="Birth Date"
@@ -160,6 +168,14 @@ function Form({ onSubmit }) {
         onChange={handleChange}
         error={errors.birthDate}
       />
+      <FormField
+  name="image"
+  label="Upload Image"
+  type="file"
+  isFileInput={true}
+  onChange={handleFileChange}
+  error={errors.image}
+/>
       <button  className="bg-purple-600 w-full px-2 pt-2  pb-4 mb-4 " type="submit">Submit Survey</button>
     </form>
   );
